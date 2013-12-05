@@ -1,0 +1,14 @@
+﻿@model TestTask.WebUI.Models.ImageEditorModel
+
+@if (String.IsNullOrEmpty(Model.ImageUrl)) {
+   using (Html.BeginForm("Upload", "Account", FormMethod.Post, new { @encType = "multipart/form-data" })) {
+
+        @FileUpload.GetHtml(initialNumberOfFiles: 1, allowMoreFilesToBeAdded: false, includeFormTag: false, addText: "", uploadText: "Upload File")
+
+        <input class="btn btn-success" type="submit" name="submit" value="upload" />
+        <a class="btn btn-danger" href="/Account/MyAccount">Cancel</a>
+        
+    }
+} else {
+     <img src="/Account/GetAvatar"  style="width:100px;height:100px"/>
+}

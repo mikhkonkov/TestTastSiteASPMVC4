@@ -1,0 +1,24 @@
+﻿@model TestTask.Domain.Entities.User
+
+@{
+    ViewBag.Title = "My Account";
+}
+
+<h2>My Account</h2>
+@if (TempData["message"] != null) {
+    <pre>@TempData["message"]</pre>
+}
+<img src="/Account/GetAvatar" />
+<hr />
+<table class="table">
+  <thead>
+      <tr><th>Firsname</th> <th>Lastname</th> <th>Email</th> <th>Date birth</th></tr>
+  </thead>
+    <tbody>
+        <tr><td>@Model.FirstName</td> <td>@Model.LastName</td> <td>@Model.Email</td> <td>@Model.DateBirth.ToLongDateString()</td></tr>
+    </tbody>
+</table>
+<hr />
+<a class="btn btn-primary" href="/Account/Upload">Change avatar</a>
+
+<a class="btn btn-primary" href="/Account/ChangeInformation">Change information</a>

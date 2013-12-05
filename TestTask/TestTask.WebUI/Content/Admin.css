@@ -1,0 +1,48 @@
+﻿
+DIV.Message { background: gray; color:White; padding: .2em; margin-top:.25em; }
+
+.field-validation-error { color: red; display: block; }
+.field-validation-valid { display: none; }
+.input-validation-error { border: 1px solid red; background-color: #ffeeee; }
+.validation-summary-errors { font-weight: bold; color: red; }
+.validation-summary-valid { display: none; }
+
+.editor-field { margin-bottom: .8em; }
+.editor-label { font-weight: bold; }
+.editor-label:after { content: ":" }
+.text-box { width: 25em; }
+.multi-line { height: 5em; font-family: Segoe UI, Verdana; }
+
+DIV.pager
+{
+  text-align: right;
+  padding: .5em 0 0 0;
+  margin-top: 1em;
+}
+
+  DIV.pager A
+  {
+    font-size: 1.1em;
+    color: gray;
+    text-decoration: none;
+    padding: 0 .4em 0 .4em;
+  }
+
+    DIV.pager A:hover
+    {
+      background-color: silver;
+    }
+
+    DIV.pager A.selected
+    {
+      background-color: #353535;
+      color: White;
+    }
+
+.center {
+    text-align:center;
+}
+
+.center form {
+    display:inline-block;
+}

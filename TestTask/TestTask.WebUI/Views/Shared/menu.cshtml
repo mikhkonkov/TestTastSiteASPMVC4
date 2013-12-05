@@ -1,0 +1,29 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+
+            <a class="brand" href="/">Test Task</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a class="navbar-brand" href="/">Home</a></li>
+                    <li><a class="navbar-brand" href="/Home/About">About</a></li>
+                    <li><a class="navbar-brand" href="/Registration">Registration</a></li>
+                    @if (TestTask.WebUI.Helpers.AuthHelper.IsAuthenticated(Context)) {
+                        <li><a class="navbar-brand" href="/Account/MyAccount">My Account</a></li>
+                    }
+                </ul>
+                <div class="pull-right">
+                    @if (TestTask.WebUI.Helpers.AuthHelper.IsAuthenticated(Context)) {
+                        <div class="brand">
+                            <img src="/Account/GetAvatar" height="25" width="25"/>
+                            @TestTask.WebUI.Helpers.AuthHelper.GetUser(Context).FirstName
+                        </div>
+                        <a class="btn btn-success" href="/Account/Logout">Logout</a>
+                    } else {
+                        <a class="btn btn-success" href="/Account/Login">Login</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@model TestTask.WebUI.Models.ImageEditorModel
+@{
+    @Scripts.Render("~/bundles/jquery")
+    <script src="@Url.Content("~/Content/Jcrop/js/jquery.Jcrop.js")" type="text/javascript"></script>
+    <link rel="stylesheet" href="@Url.Content("~/Content/JCrop/css/jquery.Jcrop.css")" type="text/css" />
+}
+
+<div id="mainform">
+
+    <img src="@Model.ImageUrl" id="jcrop_target" />
+    <hr />
+     @using (Html.BeginForm("EditImage", "Account", FormMethod.Post)) {
+        @Html.HiddenFor(x => x.Left)
+        @Html.HiddenFor(x => x.Right)
+        @Html.HiddenFor(x => x.Top)
+        @Html.HiddenFor(x => x.Bottom)
+        @Html.HiddenFor(x => x.ImageUrl)
+        <input class="btn btn-success" type='submit' name='action' value='Save' />
+        <a class="btn btn-danger" href="/Account/MyAccount">Cancel</a>
+    }
+
+    <script type="text/javascript">
+        $(function () {
+            jQuery('#jcrop_target').Jcrop({
+                onChange: showPreview,
+                onSelect: showPreview,
+                setSelect: [@Model.Top, @Model.Left, @Model.Right, @Model.Bottom],
+                aspectRatio: 1
+            });
+        });
+
+
+        function showPreview(coords)
+        {
+            if (parseInt(coords.w) > 0)
+            {
+                $('#Top').val(coords.y);
+                $('#Left').val(coords.x);
+                $('#Bottom').val(coords.y2);
+                $('#Right').val(coords.x2);
+
+                var width = @Model.Width;
+                var height = @Model.Height;
+                var rx = 100 / coords.w;
+                var ry = 100 / coords.h;
+
+                jQuery('#preview').css({
+                    width: Math.round(rx * width) + 'px',
+                    height: Math.round(ry * height) + 'px',
+                    marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+                    marginTop: '-' + Math.round(ry * coords.y) + 'px'
+                });
+            }
+        }
+    </script>
+</div>

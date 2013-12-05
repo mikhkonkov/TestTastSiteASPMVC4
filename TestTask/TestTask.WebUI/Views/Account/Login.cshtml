@@ -1,0 +1,23 @@
+﻿@model TestTask.WebUI.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutSigIn.cshtml";
+}
+
+<div class="form-signin">
+    @using (Html.BeginForm()) {
+        <h2 class="form-signin-heading">Please sign in</h2>
+        
+        @Html.Partial("AuthorizationError")
+        
+        @Html.ValidationSummary(true)
+        @Html.ValidationMessageFor(m => m.UserName);
+        @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Email address" })
+
+        @Html.ValidationMessageFor(m => m.Password);
+        @Html.TextBoxFor(m => m.Password, new { @placeholder = "Password", @type = "password" })
+
+        <input type="submit" class="btn btn-large btn-primary" value="Sig In" />
+    }
+</div>

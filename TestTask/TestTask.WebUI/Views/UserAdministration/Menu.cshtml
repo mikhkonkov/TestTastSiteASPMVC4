@@ -1,0 +1,10 @@
+﻿@model IEnumerable<bool>
+<div class="pager">
+    <a href="/admin">All</a>
+@foreach (var link in Model) { 
+
+        @Html.RouteLink((link) ? "Active" : "Inactive",
+    new { controller = "UserAdministration", action = "Index", category = link, page = 1 },
+    new { @class = (link == ViewBag.selectedCategory) ? "selected" : null })
+}
+    </div>

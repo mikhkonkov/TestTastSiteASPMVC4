@@ -1,0 +1,95 @@
+﻿@model TestTask.WebUI.Models.CreateUserModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    <link href="/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+    
+}
+
+<h2>Create a new user</h2>
+<div class="container">
+@using (Html.BeginForm("Create", "UserAdministration", new { @class = "add-on form-vertical" })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>User</legend>
+
+        <div class="editor-label">
+            Firstname
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor-label">
+            Lastname
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor-label">
+            Email
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            Password
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+            Is active
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsActive)
+            @Html.ValidationMessageFor(model => model.IsActive)
+        </div>
+
+        <div class="editor-label">
+            Role
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Id", Model.selectListItem)
+        </div>
+
+        <div class="editor-label">
+            Date birth
+        </div>
+        <div class="input-prepend date editor-field" id="dp" data-date="01.01.2013" data-date-format="dd.mm.yyyy">
+            @Html.ValidationMessageFor(model => model.DateBirth)
+            @Html.ValidationMessage("date")
+            @Html.ValidationMessageFor(m => m.DateBirth)
+            <input class="add-on data-contro" type="text" placeholder="Date birth" value="01.01.2013" id="DateBirth" name="DateBirth">
+        </div>
+
+
+        <p>
+            <input class="btn btn-primary" type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+<script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<script>
+    $(function () {
+        $('#dp').datepicker();
+    });
+</script>

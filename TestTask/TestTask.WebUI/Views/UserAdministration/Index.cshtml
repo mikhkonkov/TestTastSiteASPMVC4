@@ -1,0 +1,64 @@
+﻿@model TestTask.WebUI.Models.UserListViewModel
+
+
+@{
+    ViewBag.Title = "List users";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Users</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.getItemsPerPage()) {
+            <tr>
+                <td>@item.UserId</td>
+                <td>@item.FirstName @item.LastName</td>
+                <td>@item.Email</td>
+                <td>
+                    @if ((bool)item.IsActive) {
+                        using (Html.BeginForm("Deactivate", "UserAdministration", FormMethod.Post, new { @class = "add-on form-inline" })) {
+                        <span class="help-inline">User is active </span>
+                        @Html.Hidden("UserId", item.UserId)
+                        <input class="btn btn-danger" type="submit" value="Deactivate" />
+                        }
+                    } else {
+                        using (Html.BeginForm("Activate", "UserAdministration", FormMethod.Post, new { @class = "add-on form-inline" })) {
+                        <span class="help-inline">User is inactive </span>
+                        @Html.Hidden("UserId", item.UserId)
+                        <input class="btn btn-success" type="submit" value="Activate" />
+                        }
+
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("Edit", "UserAdministration", FormMethod.Post, new { @class = "add-on form-inline" })) {
+                        <span class="help-inline">Role:</span>
+                        @Html.Hidden("UserId", item.UserId)
+                        @Html.DropDownList("Id", Model.getRolesForUser(item))
+                        <input class="btn" type="submit" value="Change" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{ Html.RenderAction("Find", "UserAdministration"); }
+
+<div class="pager">
+    @Html.PageLinks(Model.pagingInfo, x => Url.Action("Index", new { page = x }))
+</div>
+
+@{ Html.RenderAction("Menu", "UserAdministration"); }
+
+<div class="pager">
+    <p>@Html.ActionLink("Add a new user", "Create")</p>
+</div>

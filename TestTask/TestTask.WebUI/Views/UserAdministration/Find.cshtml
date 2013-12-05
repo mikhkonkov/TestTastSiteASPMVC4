@@ -1,0 +1,6 @@
+﻿@model TestTask.WebUI.Models.FindModel
+
+@using (Html.BeginForm("Find", "UserAdministration", FormMethod.Post, new { @class = "add-on form-search" })) { 
+    @Html.TextBoxFor(f=>f.name);
+    <input class="search-query" type="submit" value="Find" />
+}
